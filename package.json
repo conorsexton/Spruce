@@ -1,0 +1,32 @@
+{
+  "name": "",
+  "version": "1.0.0",
+  "description": "An opinionated way to generate clean, marked-up text for the web. Input Markdown or plain text and get back semantic HTML with highly-tuned typographic details.",
+  "main": "main.js",
+  "scripts": {
+    "build": "NODE_ENV=production webpack",
+    "dev": "NODE_ENV=development webpack-dev-server --open & nodemon server/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/conorsexton/Typo.git"
+  },
+  "keywords": [
+    "typography",
+    "html",
+    "pre-processor"
+  ],
+  "author": "Conor Sexton",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/conorsexton/Typo/issues"
+  },
+  "homepage": "https://github.com/conorsexton/Typo#readme",
+  "dependencies": {
+    "babel": "^6.23.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "webpack": "^4.31.0",
+    "webpack-dev-server": "^3.3.1"
+  }
+}
