@@ -5,14 +5,22 @@ import Form from '../containers/Form.jsx';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      mode: 'Input',
-    };
+    this.state = { mode: 'input' };
+    this.getResults = this.getResults.bind(this);
   }
+
+  getResults(html) {
+    this.setState({ 
+      mode: 'results', 
+      results: html,
+    });
+  }
+
   render() {
     return (
       <section>
-        <Form />
+        {this.state.mode === 'input' && <Form handleResults={this.getResults} />}
+        {this.state.mode === 'results' && this.state.results}
       </section>
     );
   }

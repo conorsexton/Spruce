@@ -30,8 +30,10 @@ class Form extends Component {
       },
       body: this.state.value,
     })
-      .then(response => console.log(response))
+      .then(response => response.text())
+      .then(response => this.props.handleResults(response))
       .catch(error => console.error(`Error: ${error}`));
+      // 
   }
 
   render() {
