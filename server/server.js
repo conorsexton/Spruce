@@ -9,10 +9,7 @@ const PORT = 3000;
 app.use(bodyParser.text())
 
 app.post('/api/parse', parseMarkdown, tuneTypography, (req, res) => {
-  res
-    .header('Content-Type', 'text/html')
-    .status(200)
-    .send(res.locals.text);
+  res.json(res.locals.text);
 });
 
 app.listen(PORT);

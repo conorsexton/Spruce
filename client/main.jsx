@@ -11,10 +11,10 @@ class App extends Component {
     this.resetMode = this.resetMode.bind(this);
   }
 
-  getResults(html) {
+  getResults(results) {
     this.setState({ 
       mode: 'results', 
-      results: html,
+      results: results,
     });
   }
 
@@ -34,7 +34,8 @@ class App extends Component {
     }
     return (
       <section>
-      {this.state.results}
+        <div dangerouslySetInnerHTML={{__html: this.state.results.editorsCut}}>
+        </div>
       <Reset handleClick={this.resetMode} />
       </section>
     );

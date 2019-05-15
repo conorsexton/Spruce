@@ -30,7 +30,7 @@ class Form extends Component {
       },
       body: this.state.value,
     })
-      .then(response => response.text())
+      .then(response => response.json())
       .then(response => this.props.handleResults(response))
       .catch(error => console.error(`Error: ${error}`));
       // 
