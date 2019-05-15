@@ -10,9 +10,11 @@ module.exports = {
   },
   mode: process.env.NODE_ENV,
   devServer: {
-    publicPath: 'http://localhost:8080/build/',
+    publicPath: '/build/',
     index: 'index.html',
-    hot: true,
+    proxy: {
+      '/api': 'http://localhost:3000',
+    },
   },
   module: {
     rules: [
