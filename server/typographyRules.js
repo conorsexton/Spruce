@@ -29,7 +29,6 @@ const rules = {
         openingSingleQuote,
         wrapReplacement(`‘`, `＇`, `smartQuotes`),
       );
-      console.log('Text after opening single quote parsing:', result.htmlToCopy);
       result.htmlToCopy = result.htmlToCopy.replace(closingSingleQuote, `’`);
       result.editorsCut = result.editorsCut.replace(
         closingSingleQuote,

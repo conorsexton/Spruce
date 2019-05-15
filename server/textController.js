@@ -1,19 +1,10 @@
 const md = require('marked');
-const { primes, smartQuotes, apostrophes } = require('./typographyRules.js');
-
-// const smartenQuotes = (string) => {
-//   const dumbApostrophe = /(?<=[A-z])&#39;|'(?=\w)/gm;
-//   const openingSingleQuote = /(?<=^|\W)('|&#39;)/gm;
-//   const closingSingleQuote = /(?<!\d)('|&#39;)(?!\w)/gm;
-//   string = string.replace(dumbApostrophe, '’');
-//   string = string.replace(openingSingleQuote, '‘');
-//   return string.replace(closingSingleQuote, '’');
-// };
+const { smartQuotes, primes, apostrophes } = require('./typographyRules.js');
+const { dates } = require('./semantics.js');
 
 module.exports = {
   parseMarkdown: (req, res, next) => {
     res.locals.text = md(req.body);
-    console.log(res.locals.text);
     next();
   },
   tuneTypography: (req, res, next) => {
@@ -21,6 +12,7 @@ module.exports = {
     res.locals.text = smartQuotes.replace(res.locals.text);
     res.locals.text = apostrophes.replace(res.locals.text);
     res.locals.text = primes.replace(res.locals.text);
+    res.locals.text = dates.process(res.locals.text);
     next();
   },
 };
