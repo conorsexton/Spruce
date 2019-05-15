@@ -9,7 +9,7 @@ class Form extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: 'Paste in plain text or Markdown',
+      value: 'Paste in Markdown',
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -39,7 +39,7 @@ class Form extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <Input cols={65} onChange={this.handleChange}/>
+        <Input cols={70} rows={20} onChange={this.handleChange}/>
         <Submit />
       </form>
     );

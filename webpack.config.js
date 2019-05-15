@@ -15,6 +15,7 @@ module.exports = {
     proxy: {
       '/api': 'http://localhost:3000',
     },
+    // hot: true,
   },
   module: {
     rules: [
@@ -30,7 +31,7 @@ module.exports = {
       },
       {
         test: /\.s?css$/,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
+        use: ['style-loader', 'css-loader'],
       },
     ],
   },
