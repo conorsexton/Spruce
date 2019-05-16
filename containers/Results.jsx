@@ -51,8 +51,8 @@ class Results extends Component {
   render() {
     return (
       <section className="results">
-        <Text editorsCut={this.state.results.editorsCut} />
         <Explanation explanation={this.state.currentExplanation}/>
+        <Text editorsCut={this.state.results.editorsCut} />
         <Reset handleClick={this.handleReset} />
       </section>
     );
