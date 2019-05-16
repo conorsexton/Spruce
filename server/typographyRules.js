@@ -79,7 +79,7 @@ const rules = {
       return result;
     },
   },
-  emDash: {
+  emDashes: {
     enabled: true,
     name: 'Em Dashes',
     description: `Use an em dash—which is specifically designed for parenthetical clauses—instead of two hyphens`,
@@ -92,7 +92,7 @@ const rules = {
       result.htmlToCopy = result.htmlToCopy.replace(doubleHyphen, ' — ');
       result.editorsCut = result.editorsCut.replace(
         doubleHyphen,
-        wrapReplacement('—', '--', 'emDash'),
+        wrapReplacement('—', '--', 'emDashes'),
       );
       return result;
     },
@@ -112,6 +112,42 @@ const rules = {
       result.editorsCut = result.editorsCut.replace(
         hyphenRange,
         wrapReplacement('–', '-', 'enDashRanges'),
+      );
+      return result;
+    },
+  },
+  multiplicationSymbols: {
+    enabled: true,
+    name: 'Multiplication Symbol',
+    description: `Use a proper multiplication symbol for dimensions and mathematical expressions`,
+    replace: (string) => {
+      const result = typeof string === 'object' ? string : {
+        htmlToCopy: string,
+        editorsCut: string,
+      };
+      const fakeMultiplication = /(?<=\d\s?)x(?=\s?\d|\s)/g;
+      result.htmlToCopy = result.htmlToCopy.replace(fakeMultiplication, '×');
+      result.editorsCut = result.editorsCut.replace(
+        fakeMultiplication,
+        wrapReplacement('×', 'x', 'multiplicationSymbols'),
+      );
+      return result;
+    },
+  },
+  ellipses: {
+    enabled: true,
+    name: 'Ellipses',
+    description: `Use a proper ellipses to indicate omissions or pauses (don’t approximate with three periods)`,
+    replace: (string) => {
+      const result = typeof string === 'object' ? string : {
+        htmlToCopy: string,
+        editorsCut: string,
+      };
+      const fakeEllipses = /(?<=\w)\.{2,10}/g;
+      result.htmlToCopy = result.htmlToCopy.replace(fakeEllipses, '…');
+      result.editorsCut = result.editorsCut.replace(
+        fakeEllipses,
+        wrapReplacement('…', '...', 'ellipses'),
       );
       return result;
     },

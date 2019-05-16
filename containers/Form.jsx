@@ -10,6 +10,7 @@ class Form extends Component {
     super(props);
     this.state = {
       value: 'Paste in Markdown',
+      isEnabled: false,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -17,12 +18,15 @@ class Form extends Component {
   }
 
   handleChange(event) {
-    this.setState({ value: event.target.value });
+    if (event.target.value && event.target.value !== 'Paste in Markdown') {
+      this.setState({ value: event.target.value, isEnabled: true });
+    }
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    fetch('/api/parse', {
+    if (!this.state.isEnabled) alert('This is a pretty boring tool without any text—write or paste in Markdown to continue.');
+    else fetch('/api/parse', {
       method: 'POST',
       mode: 'no-cors',
       headers: {
@@ -40,7 +44,7 @@ class Form extends Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <Input cols={70} rows={20} onChange={this.handleChange}/>
-        <Submit />
+        <Submit isEnabled={this.state.isEnabled}/>
       </form>
     );
   }

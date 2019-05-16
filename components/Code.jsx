@@ -5,10 +5,9 @@ import React from 'react';
 
 const Code = props => {
   const content = props.content;
-  console.log(props);
   return (
     <section className="code">
-    <h4>The Code</h4>
+    <h4>HTML</h4>
     <pre>
       <code className="language-html">
         {`${content}`}
