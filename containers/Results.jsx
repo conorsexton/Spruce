@@ -3,6 +3,7 @@ import { render } from 'react-dom';
 import Text from '../components/Text.jsx';
 import Reset from '../components/Reset.jsx';
 import Explanation from '../components/Explanation.jsx';
+import rules from '../server/typographyRules.js';
 
 class Results extends Component {
   constructor(props) {
@@ -12,6 +13,7 @@ class Results extends Component {
       currentExplanation: {
         rule: null,
         type: 'initial',
+        original: null,
         descrip: `Click any higlight in your text to learn more about changes`,
       }
     };
@@ -20,15 +22,30 @@ class Results extends Component {
   }
 
   handleExplanation(event) {
-    console.log
+    const { target } = event;
+    const { dataset } = target;
+    this.setState({
+      currentExplanation: {
+        rule: rules[dataset.rule].name,
+        type: target.className,
+        original: dataset.original,
+        replacement: target.innerText,
+        descrip: rules[dataset.rule].description,
+      }
+    })
   }
 
   handleReset() {
     this.props.handleReset();
   }
 
+  componentDidMount() {
+    document.querySelectorAll('.editors-cut span').forEach((element) => {
+      element.addEventListener('click', this.handleExplanation);
+    });
+  }
+
   render() {
-    // console.log(this.state.currentExplanation);
     return (
       <section className="results">
         <Text editorsCut={this.state.results.editorsCut} />

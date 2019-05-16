@@ -1,28 +1,29 @@
-
 /* eslint-disable quotes */
 const wrapReplacement = (replacement, original, rule) => `<span class="typography" data-original="${original}" data-rule="${rule}">${replacement}</span>`;
 const rules = {
   smartQuotes: {
     enabled: true,
+    name: 'Smart Quotes',
     description: `Use smart quotes to improve legibility and visual rhythm`,
     replace: (string) => {
       const result = typeof string === 'object' ? string : {
         htmlToCopy: string,
         editorsCut: string,
       };
+      // console.log(result.htmlToCopy);
       const openingDoubleQuote = /(?<!&quot;)(?<=\s|^|>)&quot;(?=\w)/gm;
-      const closingDoubleQuote = /&quot;(?=$|[.?!:\-–—\s<])/gm;
+      const closingDoubleQuote = /(?<!\d+'|&#39;\d+)&quot;(?=$|[.?!:\-–—\s<])/gm;
       const openingSingleQuote = /(?<=^|\W)('|&#39;)(?=.*?(&#39;)[\w<]|$)/gm;
       const closingSingleQuote = /(?<!\d)('|&#39;)(?!\w)/gm;
       result.htmlToCopy = result.htmlToCopy.replace(openingDoubleQuote, '“');
       result.editorsCut = result.editorsCut.replace(
         openingDoubleQuote,
-        wrapReplacement('“', '"', 'smartQuotes'),
+        wrapReplacement('“', '＂', `smartQuotes`),
       );
       result.htmlToCopy = result.htmlToCopy.replace(closingDoubleQuote, '”');
       result.editorsCut = result.editorsCut.replace(
         closingDoubleQuote,
-        wrapReplacement(`”`, `"`, `smartQuotes`),
+        wrapReplacement(`”`, `＂`, `smartQuotes`),
       );
       result.htmlToCopy = result.htmlToCopy.replace(openingSingleQuote, `‘`);
       result.editorsCut = result.editorsCut.replace(
@@ -50,18 +51,19 @@ const rules = {
       result.htmlToCopy = result.htmlToCopy.replace(doublePrimes, '″');
       result.editorsCut = result.editorsCut.replace(
         doublePrimes,
-        wrapReplacement('″', '"', 'primes'),
+        wrapReplacement('″', '＂', 'primes'),
       );
       result.htmlToCopy = result.htmlToCopy.replace(singlePrimes, '′');
       result.editorsCut = result.editorsCut.replace(
         singlePrimes,
-        wrapReplacement('′', `'`, 'primes'),
+        wrapReplacement('′', `＇`, 'primes'),
       );
       return result;
     },
   },
   apostrophes: {
     enabled: true,
+    name: 'Apostrophes',
     description: `Use proper apostrophes to improve visual rhythm and legibility`,
     replace: (string) => {
       const result = typeof string === 'object' ? string : {

@@ -1,5 +1,5 @@
 const md = require('marked');
-const { smartQuotes, primes, apostrophes } = require('./typographyRules.js');
+const rules = require('./typographyRules.js');
 const { dates } = require('./semantics.js');
 
 module.exports = {
@@ -8,12 +8,15 @@ module.exports = {
     next();
   },
   tuneTypography: (req, res, next) => {
-    // For each rule in rules, if rule.enabled, rule.replace(text)
-    res.locals.text = smartQuotes.replace(res.locals.text);
-    res.locals.text = apostrophes.replace(res.locals.text);
-    console.log(res.locals.text.editorsCut);
-    res.locals.text = primes.replace(res.locals.text);
-    res.locals.text = dates.process(res.locals.text);
+    // @TODO: For each rule in rules, if rule.enabled, rule.replace(text)
+    for (rule in rules) {
+      if (rules[rule].enabled) {
+        res.locals.text = rules[rule].replace(res.locals.text);
+      }
+    }
+    // res.locals.text = smartQuotes.replace(res.locals.text);
+    // res.locals.text = apostrophes.replace(res.locals.text);
+    // res.locals.text = dates.process(res.locals.text);
     next();
   },
 };
