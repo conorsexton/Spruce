@@ -39,6 +39,7 @@ const rules = {
   },
   primes: {
     enabled: true,
+    name: 'Primes',
     description: `Use true prime and double prime glyphs (′,″) instead of apostrophes or quotes (',")`,
     replace: (string) => {
       const result = typeof string === 'object' ? string : {
@@ -74,6 +75,43 @@ const rules = {
       result.editorsCut = result.editorsCut.replace(
         apostrophe,
         wrapReplacement('’', '＇', 'apostrophes'),
+      );
+      return result;
+    },
+  },
+  emDash: {
+    enabled: true,
+    name: 'Em Dashes',
+    description: `Use an em dash—which is specifically designed for parenthetical clauses—instead of two hyphens`,
+    replace: (string) => {
+      const result = typeof string === 'object' ? string : {
+        htmlToCopy: string,
+        editorsCut: string,
+      };
+      const doubleHyphen = /(?<=[A-z])\s?-{2}\s?(?=[A-z])/g;
+      result.htmlToCopy = result.htmlToCopy.replace(doubleHyphen, ' — ');
+      result.editorsCut = result.editorsCut.replace(
+        doubleHyphen,
+        wrapReplacement('—', '--', 'emDash'),
+      );
+      return result;
+    },
+
+  },
+  enDashRanges: {
+    enabled: true,
+    name: 'En Dash for Ranges',
+    description: `Use an en dash (instead of a hyphen) for ranges`,
+    replace: (string) => {
+      const result = typeof string === 'object' ? string : {
+        htmlToCopy: string,
+        editorsCut: string,
+      };
+      const hyphenRange = /(?<=\d)\s?-\s?(?=\d)/g;
+      result.htmlToCopy = result.htmlToCopy.replace(hyphenRange, '–');
+      result.editorsCut = result.editorsCut.replace(
+        hyphenRange,
+        wrapReplacement('–', '-', 'enDashRanges'),
       );
       return result;
     },

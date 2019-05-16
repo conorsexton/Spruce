@@ -62,10 +62,10 @@ class Results extends Component {
   render() {
     return (
       <section className="results">
+        <Reset handleClick={this.handleReset} />
         <Explanation explanation={this.state.currentExplanation}/>
         <Text editorsCut={this.state.results.editorsCut} />
         <Code content={this.state.results.htmlToCopy} handleClick={this.copyCode} copied={this.state.codeIsCopied}/>
-        <Reset handleClick={this.handleReset} />
       </section>
     );
   }

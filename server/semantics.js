@@ -1,4 +1,10 @@
 /* eslint-disable quotes */
+const COMMON_ACRONYMS = {
+  HTML: 'HyperText Markup Language',
+  CSS: 'Cascading Style Sheet',
+  NASA: 'National Aeronautics and Space Administration',
+  USA: 'United States of America',
+};
 const semantics = {
   dates: {
     enabled: true,
@@ -27,6 +33,28 @@ const semantics = {
           `<span class="html" data-original="${match[0]}" data-rule="dates"><time datetime="${datetime}">${processedMatch}</time></span>`,
         );
         match = time.exec(match.input);
+      }
+      return html;
+    },
+  },
+  acronyms: {
+    enabled: true,
+    name: 'Acronyms',
+    description: `Use an <abbr> tag for acronyms, which helps users (and computers) gain additional context—it also makes it easy to style acronyms in small caps, for better visual flow`,
+    process: (html) => {
+      const acronym = /HTML|CSS|NASA|USA/gm;
+      let match = acronym.exec(html.htmlToCopy);
+      while (match !== null) {
+        let processedMatch = match[0];
+        html.htmlToCopy = html.htmlToCopy.replace(
+          match[0],
+          `<abbr title="${COMMON_ACRONYMS[processedMatch]}">${processedMatch}</abbr>`,
+        );
+        html.editorsCut = html.editorsCut.replace(
+          match[0],
+          `<span class="html" data-original="${processedMatch}" data-rule="acronyms"><abbr title="${COMMON_ACRONYMS[processedMatch]}">${processedMatch}</abbr></span>`,
+        );
+        match = acronym.exec(match.input);
       }
       return html;
     },
