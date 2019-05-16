@@ -19,6 +19,12 @@ h1 {
 There's some "replaced text" and a time: it's 10:14pm 
 */
 
+.results {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .results .explanation-modal {
   border-radius: 5px;
   border: 1px solid #D7CCC8;
@@ -75,4 +81,122 @@ There's some "replaced text" and a time: it's 10:14pm
   cursor: pointer;
   transform: scale(1.25);
   box-shadow: 0 1px 1px 0 #3e373540;
+}
+
+/* PRISM STUFF */
+code[class*="language-"],
+pre[class*="language-"] {
+    color: #46443e;
+    font-family: 'IBM Plex Mono', 'SF Mono', monospace;
+    direction: ltr;
+    max-width: 600px;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    font-size: 0.9em;
+    line-height: 1.5em;
+
+    -moz-tab-size: 2;
+    -o-tab-size: 2;
+    tab-size: 2;
+
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+}
+
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+    background: #b3d4fc;
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+    background: #b3d4fc;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+    padding: 1em 1em 4em;
+    margin: 2em 0;
+    overflow: auto;
+    border: 1px solid #EFEBE9;
+    border-radius: 5px;
+    background-color: #FAFAFA;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+    padding: .2em;
+    padding-top: 1px; padding-bottom: 1px;
+    background: #f8f8f8;
+    border: 1px solid #dddddd;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+    color: #999988; font-style: italic;
+}
+
+.token.namespace {
+    opacity: .7;
+}
+
+.token.string,
+.token.attr-value {
+    color: #34a064;
+}
+.token.punctuation,
+.token.operator {
+    color: #8a93c5; /* no highlight */
+}
+
+.token.entity,
+.token.url,
+.token.symbol,
+.token.number,
+.token.boolean,
+.token.variable,
+.token.constant,
+.token.property,
+.token.regex,
+.token.inserted {
+    color: #37a1d2;
+}
+
+.token.atrule,
+.token.keyword,
+.token.attr-name,
+.language-autohotkey .token.selector {
+    color: #f56f45;
+}
+
+.token.function,
+.token.deleted,
+.language-autohotkey .token.tag {
+    color: #9a050f;
+}
+
+.token.tag,
+.token.selector,
+.language-autohotkey .token.keyword {
+    color: #00009f;
+}
+
+.token.important,
+.token.function,
+.token.bold {
+    font-weight: bold;
+}
+
+.token.italic {
+    font-style: italic;
 }

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import Prism from 'prismjs';
 import { render } from 'react-dom';
 import Text from '../components/Text.jsx';
+import Code from '../components/Code.jsx';
 import Reset from '../components/Reset.jsx';
 import Explanation from '../components/Explanation.jsx';
 import rules from '../server/typographyRules.js';
@@ -16,10 +18,12 @@ class Results extends Component {
         type: 'initial',
         original: null,
         descrip: `Click any higlight in your text to learn more about changes`,
-      }
+      },
+      codeIsCopied: false,
     };
     this.handleReset = this.handleReset.bind(this);
     this.handleExplanation = this.handleExplanation.bind(this);
+    this.copyCode = this.copyCode.bind(this);
   }
 
   handleExplanation(event) {
@@ -42,7 +46,14 @@ class Results extends Component {
     this.props.handleReset();
   }
 
+  copyCode() {
+    navigator.clipboard.writeText(this.state.results.htmlToCopy)
+    .then(() => { this.setState( { codeIsCopied: true } ) })
+    .catch((error) => console.error(error));
+  }
+
   componentDidMount() {
+    Prism.highlightAll();
     document.querySelectorAll('.editors-cut span').forEach((element) => {
       element.addEventListener('click', this.handleExplanation);
     });
@@ -53,6 +64,7 @@ class Results extends Component {
       <section className="results">
         <Explanation explanation={this.state.currentExplanation}/>
         <Text editorsCut={this.state.results.editorsCut} />
+        <Code content={this.state.results.htmlToCopy} handleClick={this.copyCode} copied={this.state.codeIsCopied}/>
         <Reset handleClick={this.handleReset} />
       </section>
     );
