@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import Form from '../containers/Form.jsx';
-import Reset from '../components/Reset.jsx';
+// import Reset from '../components/Reset.jsx';
+import Results from '../containers/Results.jsx';
 
 class App extends Component {
   constructor(props) {
@@ -21,6 +22,7 @@ class App extends Component {
   resetMode() {
     this.setState({
       mode: 'input',
+      results: undefined,
     })
   }
 
@@ -34,9 +36,7 @@ class App extends Component {
     }
     return (
       <section>
-        <div dangerouslySetInnerHTML={{__html: this.state.results.editorsCut}}>
-        </div>
-      <Reset handleClick={this.resetMode} />
+        <Results results={this.state.results} handleReset={this.resetMode} />
       </section>
     );
   }
