@@ -4,6 +4,7 @@ import Text from '../components/Text.jsx';
 import Reset from '../components/Reset.jsx';
 import Explanation from '../components/Explanation.jsx';
 import rules from '../server/typographyRules.js';
+import semantics from '../server/semantics.js';
 
 class Results extends Component {
   constructor(props) {
@@ -22,15 +23,17 @@ class Results extends Component {
   }
 
   handleExplanation(event) {
-    const { target } = event;
+    let { target } = event;
+    if (target.parentElement.tagName === 'SPAN') target = target.parentElement; // Handle clicks on inner HTML
     const { dataset } = target;
+    const ruleset = target.className === 'typography' ? rules : semantics;
     this.setState({
       currentExplanation: {
-        rule: rules[dataset.rule].name,
+        rule: ruleset[dataset.rule].name,
         type: target.className,
         original: dataset.original,
         replacement: target.innerText,
-        descrip: rules[dataset.rule].description,
+        descrip: ruleset[dataset.rule].description,
       }
     })
   }

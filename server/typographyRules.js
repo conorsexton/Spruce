@@ -10,7 +10,6 @@ const rules = {
         htmlToCopy: string,
         editorsCut: string,
       };
-      // console.log(result.htmlToCopy);
       const openingDoubleQuote = /(?<!&quot;)(?<=\s|^|>)&quot;(?=\w)/gm;
       const closingDoubleQuote = /(?<!\d+'|&#39;\d+)&quot;(?=$|[.?!:\-–—\s<])/gm;
       const openingSingleQuote = /(?<=^|\W)('|&#39;)(?=.*?(&#39;)[\w<]|$)/gm;

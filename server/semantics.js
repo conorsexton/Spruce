@@ -2,7 +2,9 @@
 const semantics = {
   dates: {
     enabled: true,
-    description: `Wrap dates and times in a <time> tag to make them machine-readable`,
+    name: 'Dates and Times',
+    description: `Wrap dates and times in a <time> tag (with a date-time) to make them machine-readable. 
+    Use an <abbr> tag for a.m. and p.m. suffixes`,
     process: (html) => {
       const time = /\d{1,2}:\d{2}(?::\d{2})?\s?(?:[ap]\.?m\.?)?/gmi;
       let match = time.exec(html.htmlToCopy);
@@ -20,7 +22,10 @@ const semantics = {
           match[0],
           `<time datetime="${datetime}">${processedMatch}</time>`,
         );
-        html.editorsCut = html.htmlToCopy;
+        html.editorsCut = html.editorsCut.replace(
+          match[0],
+          `<span class="html" data-original="${match[0]}" data-rule="dates"><time datetime="${datetime}">${processedMatch}</time></span>`,
+        );
         match = time.exec(match.input);
       }
       return html;
