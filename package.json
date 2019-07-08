@@ -4,6 +4,7 @@
   "description": "An opinionated way to generate clean, marked-up text for the web. Input Markdown or plain text and get back semantic HTML with highly-tuned typographic details.",
   "main": "main.js",
   "scripts": {
+    "test": "jest",
     "build": "NODE_ENV=production webpack",
     "dev": "NODE_ENV=development webpack-dev-server --open --inline & nodemon server/server.js"
   },
@@ -19,9 +20,9 @@
   "author": "Conor Sexton",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/conorsexton/Typo/issues"
+    "url": "https://github.com/conorsexton/Spruce/issues"
   },
-  "homepage": "https://github.com/conorsexton/Typo#readme",
+  "homepage": "https://github.com/conorsexton/Spruce#readme",
   "dependencies": {
     "@babel/core": "^7.4.4",
     "@babel/preset-env": "^7.4.4",
@@ -38,6 +39,10 @@
     "webpack-cli": "^3.3.2"
   },
   "devDependencies": {
+    "babel-jest": "^24.8.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "jest": "^24.8.0",
     "webpack-dev-server": "^3.3.1"
   }
 }
