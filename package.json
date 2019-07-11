@@ -39,6 +39,7 @@
     "webpack-cli": "^3.3.2"
   },
   "devDependencies": {
+    "@types/jest": "^24.0.15",
     "babel-jest": "^24.8.0",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
