@@ -6,7 +6,7 @@ const { parseMarkdown, tuneTypography } = require('./textController.js');
 const app = express();
 const PORT = 3000;
 
-app.use(bodyParser.text())
+app.use(bodyParser.text());
 
 app.post('/api/parse', parseMarkdown, tuneTypography, (req, res) => {
   res.json(res.locals.text);

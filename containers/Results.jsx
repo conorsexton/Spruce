@@ -54,6 +54,7 @@ class Results extends Component {
 
   componentDidMount() {
     Prism.highlightAll();
+    // Bind click handler to span highlights
     document.querySelectorAll('.editors-cut span').forEach((element) => {
       element.addEventListener('click', this.handleExplanation);
     });

@@ -1,5 +1,14 @@
 /* eslint-disable quotes */
+// Helper function to wrap string replacements in span with rule details
 const wrapReplacement = (replacement, original, rule) => `<span class="typography" data-original="${original}" data-rule="${rule}">${replacement}</span>`;
+/*
+Each rule should have a name, description, and replace method
+Replace method comprises RegEx patterns to match
+Should return “result” — an object with two string properties:
+- htmlToCopy is the “cleaned” output
+- editorsCut is the version with span-wrapped “explanations”
+Enable/disable rules with the “enabled” property
+*/
 const rules = {
   smartQuotes: {
     enabled: true,

@@ -8,21 +8,19 @@ module.exports = {
     res.locals.text = md(req.body);
     next();
   },
+  // Make typographic adjustments
   tuneTypography: (req, res, next) => {
-    // @TODO: For each rule in rules, if rule.enabled, rule.replace(text)
     for (const rule in rules) {
       if (rules[rule].enabled) {
         res.locals.text = rules[rule].replace(res.locals.text);
       }
     }
+    // Make HTML improvements
     for (const rule in semantics) {
       if (semantics[rule].enabled) {
         res.locals.text = semantics[rule].process(res.locals.text);
       }
     }
-    // res.locals.text = smartQuotes.replace(res.locals.text);
-    // res.locals.text = apostrophes.replace(res.locals.text);
-    // res.locals.text = dates.process(res.locals.text);
     next();
   },
 };

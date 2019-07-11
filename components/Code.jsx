@@ -1,7 +1,4 @@
 import React from 'react';
-// import Prism from "prismjs";
-// import '../client/prism.css';
-// import { render } from 'react-dom';
 
 const Code = props => {
   const content = props.content;

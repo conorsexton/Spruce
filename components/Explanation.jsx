@@ -1,5 +1,4 @@
 import React from 'react';
-import { render } from 'react-dom';
 
 const Explanation = props => {
   const { rule, type, original, replacement, descrip } = props.explanation;
