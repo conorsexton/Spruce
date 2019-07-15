@@ -12,6 +12,7 @@ Spruce automatically fixes common typographic “errors”—approximations in t
 * Pseudo ellipses
 * Hyphens and dashes
 * Multiplication symbols
+
 The ruleset Spruce follows is based on RegEx—so while there may be edge cases it can’t catch (like deeply nested quotation marks), you can easily add new rules as your style needs grow.
 #### HTML semantics
 For now, Spruce makes two small semantic changes to HTML
